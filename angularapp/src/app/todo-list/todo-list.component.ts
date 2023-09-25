@@ -17,7 +17,31 @@ export class TodoListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addTodo() {
+    if (this.newTodo.trim() !== '') {
+      this.todos.push({ text: this.newTodo, editing: false });
+      this.newTodo = '';
+    }
+  }
 
+  removeTodo(index: number) {
+    this.todos.splice(index, 1);
+  }
+
+  editTodo(todo: Todo) {
+    this.selectedTodo = todo;
+    todo.editing = true;
+  }
+
+  cancelEdit(todo: Todo) {
+    this.selectedTodo = null;
+    todo.editing = false;
+  }
+
+  saveEdit(todo: Todo) {
+    todo.editing = false;
+    this.selectedTodo = null;
+  }
 }
 
 
